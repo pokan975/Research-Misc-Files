@@ -165,5 +165,13 @@
 # g[0]=S[0]
 # =============================================================================
 
-
+from collections import Counter
+A = 'apple apple'
+B = "banana"
+ans = []
+c = A.split(' ') + B.split(' ')
+d = Counter(c)
+for i in c:
+    if d[i] == 1:
+        ans.append(i)
 
