@@ -201,9 +201,70 @@
 #         i += 1
 # =============================================================================
 
-a = "Let's take LeetCode contest"
-aa = a.split(' ')
-rev = []
-for i in aa:
-    rev.append(i[::-1])
-ans = ' '.join(rev)
+# =============================================================================
+# a = "Let's take LeetCode contest"
+# aa = a.split(' ')
+# rev = []
+# for i in aa:
+#     rev.append(i[::-1])
+# ans = ' '.join(rev)
+# =============================================================================
+
+# =============================================================================
+# emails = ["test.email+alex@leetcode.com","testemail+david@lee.tcode.com","test.e.mail+bob.cathy@leetcode.com"]
+# addr = set()
+# for i in emails:
+#     local, domain = i.split('@')
+#     if '+' in local:
+#         local = local[:local.index('+')]
+#     addr.add(local.replace('.','')+'@'+domain)
+# print(len(addr))
+# 
+# aa = {'google','facebook','apple'}
+# print(aa)
+# aa.add('google')
+# print(aa)
+# =============================================================================
+
+# =============================================================================
+# moves = "UD"
+# print(moves.count('U') == moves.count('D') and moves.count('L') == moves.count('R'))
+# =============================================================================
+
+# =============================================================================
+# grid = [[1,1,1],[1,0,1],[1,1,1]]
+# x = 0
+# y = [0]*len(grid[0])
+# z = len(grid)**2
+# for i in grid:
+#     x = x + max(i)
+#     z = z - i.count(0)
+#     for j in range(len(i)):
+#         if y[j] < i[j]:
+#             y[j] = i[j]
+# print(x+z+sum(y))
+# =============================================================================
+
+S = "loveleetcode"
+C = 'e'
+
+def go(m):
+    if C in m:
+        return m.index(C)
+    else:
+        return len(S)+1
+
+ans = []
+for idx in range(len(S)):
+    lm, rm = S[:idx], S[idx:]
+    ans.append(min(go(lm),go(rm)))
+    
+
+
+
+
+
+
+
+
+
