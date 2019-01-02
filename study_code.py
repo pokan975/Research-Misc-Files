@@ -271,8 +271,68 @@
 #         return t1
 # =============================================================================
     
+# =============================================================================
+# class Solution:
+#     def searchBST(self, root, val):
+#         """
+#         :type root: TreeNode
+#         :type val: int
+#         :rtype: TreeNode
+#         """
+#         if not root: # equals (if root == None)
+#             return None
+#         if root.val == val:
+#             return root
+#         
+#         return self.searchBST(root.left, val) or self.searchBST(root.right, val)
+# =============================================================================
 
+# =============================================================================
+# ops = ["5","2","C","D","+"]
+# ans = []
+# for i in ops:
+#     if i is "D":
+#         ans.append(ans[-1]*2)
+#     elif i is "C":
+#         ans.pop(-1)
+#     elif i is "+":
+#         ans.append(ans[-1]+ans[-2])
+#     else:
+#         ans.append(int(i))
+# print(sum(ans))
+# =============================================================================
 
+# =============================================================================
+# grid = [[1,0]]
+# row_N = len(grid[0])
+# col_N = len(grid)
+# block = 0
+# side = 0
+# for i in grid:
+#     block += sum(i)
+# if row_N > 1:
+#     for col in range(col_N):
+#         for row in range(1,row_N):
+#             side = side + (grid[col][row-1] and grid[col][row])
+# 
+# if col_N > 1:
+#     for row in range(row_N):
+#         for col in range(1,col_N):
+#             side = side + (grid[col-1][row] and grid[col][row])
+# print(block*4-side*2)
+# =============================================================================
+
+N = 22
+ans = 0
+bin_str = bin(N)
+a = len(bin_str)
+k = bin_str.index('1')
+last_k = a-1-(bin_str[::-1].index('1'))
+while k != last_k:
+    kk = bin_str[k+1::].index('1')
+    if (kk-k) > ans:
+        ans = kk-k
+    
 
 
 
