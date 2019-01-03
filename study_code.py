@@ -322,17 +322,48 @@
 # print(block*4-side*2)
 # =============================================================================
 
-N = 22
-ans = 0
-bin_str = bin(N)
-a = len(bin_str)
-k = bin_str.index('1')
-last_k = a-1-(bin_str[::-1].index('1'))
-while k != last_k:
-    kk = bin_str[k+1::].index('1')
-    if (kk-k) > ans:
-        ans = kk-k
-    
+# =============================================================================
+# N = 8
+# ans = 0
+# bin_str = bin(N)
+# a = len(bin_str)
+# k = bin_str.index('1')
+# last_k = a-1-(bin_str[::-1].index('1'))
+# while k != last_k:
+#     kk = bin_str[k+1::].index('1')
+#     if kk+1 > ans:
+#         ans = kk+1
+#     k = k + kk + 1
+# class Solution:
+#     def binaryGap(self, N):
+#         A = [i for i in range(32) if (N >> i) & 1]
+#         if len(A) < 2: 
+#             return 0
+#         return max(A[i+1] - A[i] for i in range(len(A) - 1))
+# =============================================================================
+
+# =============================================================================
+# class Solution:
+#     def singleNumber(self, nums):
+#         """
+#         :type nums: List[int], only 1 num is unique, find that
+#         :rtype: int
+#         nums=[4,1,2,1,2] -> return 4
+#         """
+#         from functools import reduce
+#         return reduce(lambda x, y: x ^ y, nums)
+# def singleNumber(self, nums):
+#         standard = 0
+#         for i, v in enumerate(nums):
+#             standard = v ^ standard
+#         return standard
+# =============================================================================
+
+# =============================================================================
+# n = 7
+# bit = bin(n)
+# print(all(bit[i] != bit[i+1] for i in range(len(bit)-1)))
+# =============================================================================
 
 
 
