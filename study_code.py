@@ -365,8 +365,24 @@
 # print(all(bit[i] != bit[i+1] for i in range(len(bit)-1)))
 # =============================================================================
 
+# =============================================================================
+# nums = [[1,2], [3,4]]
+# r, c = 2, 2
+# total = [i for sub in nums for i in sub]
+# ans = []
+# for ii in range(r):
+#     ans.append(total[ii*c:(ii+1)*c:])
+# 
+# if len(nums)*len(nums[0]) == r*c:
+#     ans = [[nums[(y*c+x)//len(nums[0])][(y*c+x)%len(nums[0])] for x in range(c)] for y in range(r)]
+# else: 
+#     ans = nums
+# =============================================================================
 
-
+candies = [1,2,2,2,3,3,4,4,4,5,5,5,5,5,5,5]
+s = list(set(candies))
+candies.remove(5)
+sister = []
 
 
 
