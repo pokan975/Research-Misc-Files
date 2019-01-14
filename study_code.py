@@ -452,6 +452,50 @@
 #         i+=1
 # =============================================================================
 
+# =============================================================================
+# def Solution(self, word):
+# #    :type word: str
+# #    :rtype: bool
+#     from functools import reduce
+#     ASCII = [ord(i) for i in word]
+#     bool_list = list(map(lambda x: 65 <= x <= 90, ASCII))
+# 
+#     if len(bool_list) is 1:
+#         return True
+#         
+#     if bool_list[0] is True:
+#         bool_set = set(bool_list[1:])
+#         if len(bool_set) is 1:
+#             return True
+#         else:
+#             return False
+#     else:
+#         bool_rest = reduce(lambda x, y: x or y, bool_list[1:])
+#         if bool_rest is False:
+#             return True
+#         else:
+#             return False
+# 
+# def detectCapitalUse(self, word):
+#     return word.lower()==word or word.upper()==word or (word[0].upper()==word[0] and word[1:].lower() == word[1:])
+# =============================================================================
 
+# =============================================================================
+# # K points that are nearest to origin 
+# points = [[3,3],[5,-1],[-2,4]]
+# K = 2
+# points.sort(key = lambda coord: coord[0]**2 + coord[1]**2)
+# ans = points[:K]
+# =============================================================================
 
+# =============================================================================
+# N = 2
+# a,b = 0,1
+# for _ in range(N):
+#     a, b = b, a+b
+# Fibonacci_num = a
+# =============================================================================
+
+prime = [2,3,5,7,11,13,17,19]
+a = list(filter(lambda x: x <= 10, prime))
 
