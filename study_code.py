@@ -496,6 +496,15 @@
 # Fibonacci_num = a
 # =============================================================================
 
-prime = [2,3,5,7,11,13,17,19]
-a = list(filter(lambda x: x <= 10, prime))
+import random
+if 0.1:
+    print("test")
+a = random.randint(10,20)
+print("",a)
+
+import matplotlib.pyplot as plt
+b = [1,2,3]
+plt.plot(b)
+
+
 
