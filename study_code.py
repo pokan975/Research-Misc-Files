@@ -496,15 +496,80 @@
 # Fibonacci_num = a
 # =============================================================================
 
-import random
-if 0.1:
-    print("test")
-a = random.randint(10,20)
-print("",a)
+# =============================================================================
+# nums = [9,6,4,2,3,5,7,0,1]
+# a = list(set(nums)) #把一個list用set()轉成set會自動做排序
+# =============================================================================
 
-import matplotlib.pyplot as plt
-b = [1,2,3]
-plt.plot(b)
+# =============================================================================
+# def summ(x: int, y: int) -> bool:
+#     return x + y
+# 
+# nums = [1,2,3,1,2,3]
+# k = 3
+# dic = {}
+# ans = False
+# 
+# for i in range(len(nums)):
+#     current = nums[i]
+#     if current in dic and i-dic[current] <= k: #{val : index}
+#         ans = True
+#     else:
+#         dic[current] = i
+# 
+# print(summ(2, 3))
+# =============================================================================
 
+# =============================================================================
+# import re
+# 
+# s1 = "This is a test\n"
+# s2 = "\n"
+# s3 = "allee@asu.edu\n"
+# s4 = "\n"
+# string = [s1,s2,s3,s4]
+# 
+# f = open("test.txt", "w")
+# 
+# for line in string:
+#     f.write(line)
+#     match = re.search(r"^T[\S]+\s", line)
+#     if match:
+#         line = "insert\n"
+#         f.write(line)
+# 
+# f.close()
+# =============================================================================
 
+# =============================================================================
+# import re
+# num = list(range(1,11))
+# total = len(num)
+# invalid = 0
+# invalid1 = {'0','1','8'}
+# invalid2 = {'3','4','7'}
+# 
+# for i in num:
+#     number = str(i)
+#     digi_list = re.findall(r'\d', number)
+#     digits = set(digi_list)
+#     if digits.issubset(invalid1):
+#         invalid += 1
+#     if not digits.isdisjoint(invalid2):
+#         invalid += 1
+# =============================================================================
 
+string = "(()())(())(()(()))"
+res = []
+balance = 0
+i = 0
+
+for j in range(len(string)):
+    if string[j] == "(":
+        balance += 1
+    elif string[j] == ")":
+        balance -= 1
+    if balance == 0:
+        res.append(string[i+1:j])
+        i = j+1
+ans = "".join(res)
