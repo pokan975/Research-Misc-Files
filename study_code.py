@@ -573,3 +573,122 @@ for j in range(len(string)):
         res.append(string[i+1:j])
         i = j+1
 ans = "".join(res)
+
+# =============================================================================
+# string = "   -42"
+# 
+# i, ans = 0, 0
+# num = ""
+# 
+# strlist = string.split(" ")
+# if (strlist[0][0] == "-" or strlist[0][0].isdigit()):
+#     num = num + strlist[0]
+# =============================================================================
+
+# =============================================================================
+# ROMAN = [
+#     (1000, "M"),
+#     ( 900, "CM"),
+#     ( 500, "D"),
+#     ( 400, "CD"),
+#     ( 100, "C"),
+#     (  90, "XC"),
+#     (  50, "L"),
+#     (  40, "XL"),
+#     (  10, "X"),
+#     (   9, "IX"),
+#     (   5, "V"),
+#     (   4, "IV"),
+#     (   1, "I"),
+# ]
+# 
+# number = 19
+# result = ""
+# for (arabic, roman) in ROMAN:
+#     (factor, number) = divmod(number, arabic)
+#     result += roman * factor
+# =============================================================================
+
+# =============================================================================
+# stones = [2,2]
+# stones.sort()
+# 
+# while(len(stones) > 1):
+#     if len(stones) >= 2:
+#         remain = abs(stones.pop() - stones.pop())
+#         if remain != 0:
+#             stones.append(remain)
+#             stones.sort()
+#     else:
+#         break
+# =============================================================================
+
+# =============================================================================
+# n = 10
+# from math import sqrt
+# prime = [1]*n
+# prime[0] = 0
+# prime[1] = 0
+# 
+# upper = int(sqrt(n))
+# 
+# for i in range(2,upper+1):
+#     if not prime[i]:
+#         continue
+#     for j in range(i**2,n,i):
+#         prime[j] = 0
+# 
+# count = sum(prime)
+# =============================================================================
+
+# =============================================================================
+# grid = [[3,0,8,4],[2,4,5,7],[9,2,6,3],[0,3,1,0]]
+# 
+# v = len(grid)
+# h = len(grid[0])
+# 
+# skylineV = [0]*v
+# skylineH = [0]*h
+# 
+# for i in range(v):
+#     skylineV[i] = max(grid[i])
+#     
+#     for j in range(h):
+#         skylineH[j] = max(skylineH[j], grid[i][j])
+# 
+# count = 0
+# for i in range(v):
+#     for j in range(h):
+#         inc = min(skylineV[i], skylineH[j]) - grid[i][j]
+#         count += inc
+# =============================================================================
+
+# =============================================================================
+# nums = [2, 2, 3, 1]
+# nums = set(nums)
+# if len(nums) > 2:
+#     nums.remove(max(nums))
+#     nums.remove(max(nums))
+# ans = max(nums)
+# =============================================================================
+
+from collections import Counter
+words = ["abc","deq","mee","aqq","dkd","ccc"]
+pattern = "abb"
+
+patlen = Counter(pattern)
+
+i = 0
+while(i<len(words)):
+    if len(Counter(words[i])) != len(patlen):
+        words.remove(words[i])
+    else:
+        i += 1
+        
+outtab = "".join(patlen)
+ans = []
+for word in words:
+    intab = "".join(Counter(word))
+    transtab = word.maketrans(intab, outtab)
+    if word.translate(transtab) == pattern:
+        ans.append(word)
