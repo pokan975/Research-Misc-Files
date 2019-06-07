@@ -559,20 +559,22 @@
 #         invalid += 1
 # =============================================================================
 
-string = "(()())(())(()(()))"
-res = []
-balance = 0
-i = 0
-
-for j in range(len(string)):
-    if string[j] == "(":
-        balance += 1
-    elif string[j] == ")":
-        balance -= 1
-    if balance == 0:
-        res.append(string[i+1:j])
-        i = j+1
-ans = "".join(res)
+# =============================================================================
+# string = "(()())(())(()(()))"
+# res = []
+# balance = 0
+# i = 0
+# 
+# for j in range(len(string)):
+#     if string[j] == "(":
+#         balance += 1
+#     elif string[j] == ")":
+#         balance -= 1
+#     if balance == 0:
+#         res.append(string[i+1:j])
+#         i = j+1
+# ans = "".join(res)
+# =============================================================================
 
 # =============================================================================
 # string = "   -42"
@@ -672,23 +674,59 @@ ans = "".join(res)
 # ans = max(nums)
 # =============================================================================
 
-from collections import Counter
-words = ["abc","deq","mee","aqq","dkd","ccc"]
-pattern = "abb"
+# =============================================================================
+# from collections import Counter
+# words = ["abc","deq","mee","aqq","dkd","ccc"]
+# pattern = "abb"
+# 
+# patlen = Counter(pattern)
+# 
+# i = 0
+# while(i<len(words)):
+#     if len(Counter(words[i])) != len(patlen):
+#         words.remove(words[i])
+#     else:
+#         i += 1
+#         
+# outtab = "".join(patlen)
+# ans = []
+# for word in words:
+#     intab = "".join(Counter(word))
+#     transtab = word.maketrans(intab, outtab)
+#     if word.translate(transtab) == pattern:
+#         ans.append(word)
+# =============================================================================
 
-patlen = Counter(pattern)
+# =============================================================================
+# n = 198
+# m, digits = 1, 9
+# base = 0
+# while(n > digits):
+#     n = n - digits
+#     m = m + 1
+#     digits = 9*m*(10**(m-1))
+#     base = 10**(m-1) - 1
+#     
+# c1, c2 = divmod(n, m)
+# if c2 == 0:
+#     num = base + c1
+#     ans = int(str(num)[m-1])
+# else:
+#     num = base + c1 + 1
+#     ans = int(str(num)[c2-1])
+# =============================================================================
 
-i = 0
-while(i<len(words)):
-    if len(Counter(words[i])) != len(patlen):
-        words.remove(words[i])
-    else:
-        i += 1
+
+A = [[0,0,1,1],[1,0,1,0],[1,1,0,0]]
+
+for i in range(len(A[0])):
+    col = []
+    for j in range(len(A)):
+        col.append(bool(A[j][i]))
         
-outtab = "".join(patlen)
-ans = []
-for word in words:
-    intab = "".join(Counter(word))
-    transtab = word.maketrans(intab, outtab)
-    if word.translate(transtab) == pattern:
-        ans.append(word)
+    
+
+count = 0    
+for row in A:
+    binstr = "".join(map(str, row))
+    count += int(binstr, 2)
