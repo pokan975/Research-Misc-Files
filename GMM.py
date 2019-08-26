@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.stats as st
 
 
 N = 8000
@@ -17,3 +18,9 @@ for i in range(N):
     
 plt.hist(sample, bins = 50)
 plt.show()
+
+
+x = np.arange(3)
+y = np.arange(3)
+z = np.column_stack([x.ravel(), y.ravel()])
+a = st.multivariate_normal([0,0], 1*np.eye(2)).pdf([0,0])
