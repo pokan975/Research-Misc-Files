@@ -1,29 +1,50 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Oct 21 15:26:49 2019
-
 @author: WilliamShih
+
+This program simulates generating samples from Dirichlet process using
+stick-breaking approach, takes standard Gaussian as base distribution
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
+from functools import reduce
 
-np.random.seed(0)
+np.random.seed(1)
 
-# number of realizations
+def Stick_Breaking(num_weights, alpha):
+    betas = np.random.beta(1, alpha, size = num_weights) 
+    betas[1:] *= np.cumprod(1 - betas[:-1])
+    return betas
+
+# number of samples
 n = 10
+# alpha for Dirichlet distribution
 alpha = 1
 
-x = np.random.normal(0., 1., (n, 1))
-v = np.random.beta(alpha, 1, (n, 1))
+sample = np.zeros(n)
 
-sample = np.zeros((n, 1))
-sample[0, 0] = v[0, 0]
+# generate realization from G_0 (base distribution)
+x = np.random.normal(0., 1., n)
+# generate theta from beta distribution
+theta = np.random.beta(alpha, 1, n)
+# compute Dirichlet samples
+sample[0] = theta[0]
 
 for i in range(1, n):
-    sample[i, 0] = v[i, 0]
-    for j in range(i):
-        sample[i, 0] *= (1 - v[j, 0])
-        
-plt.bar(x, range(n))
+    sample[i] = theta[i]
+    sample[i] *= reduce(lambda x, y: x*y, 1 - theta[:i])
+
+# another func to generate samples from Dirichlet process
+# referred from stackoverflow
+weights = Stick_Breaking(n, alpha)
+
+plt.rcParams['font.size'] = 12
+plt.stem(x, sample, use_line_collection = True)
+plt.xlabel("$G_0$ (Gaussian)")
+plt.ylabel("Weight")
 plt.show()
+# check if samples sum to 1
+print("Sum of all weights:")
+print(sum(sample), sum(weights))
