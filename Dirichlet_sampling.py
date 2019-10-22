@@ -8,6 +8,7 @@ stick-breaking approach, takes standard Gaussian as base distribution
 """
 
 import numpy as np
+import scipy.stats as st
 import matplotlib.pyplot as plt
 from functools import reduce
 
@@ -41,9 +42,14 @@ for i in range(1, n):
 weights = Stick_Breaking(n, alpha)
 
 plt.rcParams['font.size'] = 12
+xx = np.linspace(-3, 3, 100)
+yy = np.fromiter(map(lambda x: st.norm(0., 1.).pdf(x), xx), dtype = np.float)
+
 plt.stem(x, sample, use_line_collection = True)
+plt.plot(xx, yy, 'r-')
 plt.xlabel("$G_0$ (Gaussian)")
 plt.ylabel("Weight")
+plt.grid()
 plt.show()
 # check if samples sum to 1
 print("Sum of all weights:")
