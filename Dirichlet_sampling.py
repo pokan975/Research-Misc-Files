@@ -2,7 +2,6 @@
 """
 Created on Mon Oct 21 15:26:49 2019
 @author: WilliamShih
-
 This program simulates generating samples from Dirichlet process using
 stick-breaking approach, takes standard Gaussian as base distribution
 """
@@ -42,13 +41,15 @@ for i in range(1, n):
 weights = Stick_Breaking(n, alpha)
 
 plt.rcParams['font.size'] = 12
+# plot base distribution
 xx = np.linspace(-3, 3, 100)
 yy = np.fromiter(map(lambda x: st.norm(0., 1.).pdf(x), xx), dtype = np.float)
 
-plt.stem(x, sample, use_line_collection = True)
-plt.plot(xx, yy, 'r-')
+plt.stem(x, sample, label = "a realization")
+plt.plot(xx, yy, 'g-', label = "base dist.")
 plt.xlabel("$G_0$ (Gaussian)")
 plt.ylabel("Weight")
+plt.legend()
 plt.grid()
 plt.show()
 # check if samples sum to 1
