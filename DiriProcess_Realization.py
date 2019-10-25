@@ -9,7 +9,7 @@ import scipy.stats as st
 import matplotlib.pyplot as plt
 from functools import reduce
 
-np.random.seed(1)
+np.random.seed(0)
 # concentration parameter
 alpha = 2
 # =============================================================================
@@ -79,7 +79,7 @@ for c in range(1, customer):
     
     # customer selects new table, add a table with 1 customer
     if t[0][0] == len(tables) - 1:
-        tables.insert(-2, 1)
+        tables.insert(-1, 1)
         tablenum.append(tablenum[-1] + 1)
     # customer selects one of current tables, add 1 to that table
     else:
