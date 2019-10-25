@@ -94,3 +94,14 @@ plt.xlabel("customer index")
 plt.ylabel("table number")
 plt.grid()
 plt.show()
+
+# construct Dirichlet realization with base distribution
+theta = np.random.normal(0., 1., len(tables)-1)
+# calc probability weights
+table_prob = np.array(tables[:-1]) / sum(tables[:-1])
+
+plt.stem(theta, table_prob)
+plt.xlabel(r"$\theta_i$ (from standard normal)")
+plt.ylabel(r"Prob. Weight ($\pi_i$)")
+plt.grid()
+plt.show()
