@@ -1,0 +1,93 @@
+Coexistence:
+The Future is Unlicensed: Coexistence in the Unlicensed Spectrum for 5G
+1. 5G flexible requirement: ultra dense, scalable, customizable (IoT)
+2. flexible UL/DL allocation; finite BW; scalable transmission time interval; op at diff bands
+3. 5G needs to use unlicensed bands for its own app; however, there are many other app o this band (existing networks) & lack of coordination
+including heterogeneity, mass connectivity, ubiquitous IoT devices
+4. so 5G needs mechanism to coexist in unlicensed bands -> Wifi is a likely
+5. deploy network resource by traffic forecast and failure scenario
+6. need sparse capacity since have sudden increase while; but not as more as possible -> a waste -> need a dynamic mechanism to adapt this
+7. micro-cell over-provisioned; small-cell even further (too many heterogeneous) -> so traffic variation
+8. why use unlicensed spectrum in 5G spec? -> provide flexibility and agility for expanding capacity using; cost aspect -> unlicensed bands are free
+to use (new unlicensed bands: 7/11 GHz in mm waveband)
+9. unlicensed bands also for massive IoT devices, so high heterogeneous, variable load requirement; massive connectivity (allow for access to
+spectrum for innovation)
+10. cognitive radio/dynamic spectrum access need to provide reliable coex mechanism not to hazard other app in light-licensed/unlicensed Spectrum
+11. so why coexistence matters in 5G? -> high heterogeneity, diff app require diff performance measurement (transmission power)
+12. challenges in coexistence problem? -> heterogeneous devices use diff protocols -> no coordinate with each other (LTE-U no listen-before-talk, but
+Wifi has; LTE-U adapts its offline period when Wifi online)
+13. LTE expands to 5GHz for traffic offloading
+14. heterogeneous devices have diff protocols/priority setting -> no cooperation -> no fair coexistence
+15. coex can be done in time/freq/space/code domains -> to implement, need flexibility in at least one domains
+16. schemes: centralized coordinator -> distribute resources for all devices; decentralized coord -> each operator does its own optimization indep,
+share spectrum through observations & own performance
+
+
+DCS
+1. action set: available channels
+2. reward: constant value if successful/unsuccessful data packet transmission
+
+Wideband Autonomous Cognitive Radio (WACR)
+1. identify sweeping jammer & others
+2. select subband; jammer as radar signals
+3. reward func: the amount of time it takes for the jammer or interference signals to interfere a WACR once it switched to a subband
+4. WACR at band a: jammer/other user switch to band a = take action a -> get reward R(s, a) = time to interfere orig user
+
+MTRL:
+1. some papers about MTRL presumed expert knowledge on planning algorithm
+2. take indep exploration to get direct info about env and reward; while expert's trajectories show direct info about optimal policy
+3. sample world model -> adopt planner -> weigh model's likelihood based on how likely this model's optimal policy gen expert data
+4. use model dist to search in policy space
+5. world model unknown, but have expert's trajectories for a world model based on his optimal policy gen by planning algorithm
+6. need to estimate world model and find optimal policy
+7. MTRL: a seq of MDP chosen from random;y/fixed dist -> dist of MDP by hierarchical Bayesian MM
+8. MTRL -> multiple value functions
+9. if MDPs are indep of each other -> no mutual info -> just optimize each one 1-by-1 from scratch
+10. if share some aspects of the model -> opt for 1 helps opt for other quickly
+11. assumption: some MDPs share properties -> transfer model between learning MDPs (if indep, do not share)
+12. so need to calc the mutual info
+13. use hierarchical inf model (unknown num of components) -> each component represents a similar MDP class (samples in a component = 1 MDP)
+contributions: use learned model as prior knowledge to explore new env more efficiently; learn num of underlying MDP classes; adapt to case when
+a new MDP belongs to a new class
+15. MTRL has a dist over all possible MDPs or tasks
+16. observation from indep exploration (direct info) + expert trajectories (indirect info)
+17. experts know something about world model -> experts have planning algo to devise optimal policy for a given model
+18. want to find underlying POMDP model
+
+16. successive MDPs share similar dynamics/reward func/trans prob
+17. use previous opt value func as initial value func for next MDPs
+18. gen general features map diff MDP together
+-> limited framework -> all assume MDPs share a least amount of info between each together
+contributions: maintain prob models of MDP hierarchy; can use common structure between RLs; release dependence between Rls, give more freedom to learn
+
+Organizations:
+1. multiple agents: our agents are communication systems and radars.
+2. each agent has its own observation set and action set, respectively.
+3. use past and current observations to predict true state at next time step
+4. objective is to find the optimal spectrum policies which minimize inferences and/or maximize throughput
+5. reward function: inference strength + throughput + radar resolution + total spectrum utilization
+6. state space: occupancy of the channels (learned on the fly)
+7. action space: work on a particular channel (also learned on the fly?)
+8. the world model is dynamic because all agents are constantly acting in the env without communicating with each other
+9. so world model is uncertain, and each agent's observational scope is localized and hence restricted
+10. heterogeneous applications have different measures of QoS, just like decentralized multitask MDP
+11. condition of convergence? -> reach local optimization
+12. need a glbal reward func: total utilization of spectrum; diff app have diff QoS measurements/priorities; not all available channels fits all
+possible applications
+13. context-aware: cognize the presence of primary user
+14. to simplify problem: channel selection for comm/radar users; present or absent for radars (or consider switch channels); decentralized
+(multiagents); diff comm users have corresponding priorities (considered in global reward); a global reward for the optimal utilization of the whole
+spectrum; comm user also accepts offline; time-domain (discrete & fixed time slot); radar adjusts its central freq & BW
+15. for radar, can use SINR as reward func = when centering at f and BW B; I = interfernece from comm users + noise
+16. discretize the radar band, and only contiguous band can be used
+17. "spectrum coex of heterogeneous system": to find inspirations for how to measure performance of diff comm app as reward func; incorporate radar;
+how to include all heterogeneous app to get global reward function
+18. use prob model to model the classification error of the system (channel state identification)
+19. for whole spectrum: partition spectrum into individual channels; each app has diff priority; total utilization/interference/priority weight
+20. for radar: take contiguous channels (higher BW, higher resolution) -> depends on target, so it's a dependent reward func; SINR + resolution
+SINR from collide with comm sys
+21 !!!!!!!!!!!!!!!!!! dependent reward func (probability dist assigned to R); sequential info for reward func
+22. uncertainty: world dynamics/observation noise/hidden states(area in world)/other agent's behavior
+
+SBPR
+1. all agents share the same objective func (global value func)
