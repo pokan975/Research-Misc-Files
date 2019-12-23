@@ -88,6 +88,9 @@ how to include all heterogeneous app to get global reward function
 SINR from collide with comm sys
 21 !!!!!!!!!!!!!!!!!! dependent reward func (probability dist assigned to R); sequential info for reward func
 22. uncertainty: world dynamics/observation noise/hidden states(area in world)/other agent's behavior
+23. metrics for assessing the spectrum utilization efficiency are needed as the demand for radio spectrum increases
+so does the importance of its efficient use, so new metrics capturing the diversity of technologies are essential.
+24. 
 
 SBPR
 1. all agents share the same objective func (global value func)
