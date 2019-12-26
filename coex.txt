@@ -1,0 +1,60 @@
+Why 5G needs unlicensed bands?
+The Future is Unlicensed: Coexistence in the Unlicensed Spectrum for 5G
+1. 5G flexible requirement: ultra dense, scalable, customizable (IoT)
+2. flexible UL/DL allocation; finite BW; scalable transmission time interval; op at diff bands
+3. 5G needs to use unlicensed bands for its own app; however, there are many other app o this band (existing networks) & lack of coordination
+including heterogeneity, mass connectivity, ubiquitous IoT devices
+4. use unlicensed spectrum when needed provides (1) flexibility and agility for expanding capacity using (2) cost aspect -> unlicensed bands are free
+to use (new unlicensed bands: 7/11 GHz in mm waveband)
+5. LTE expands to 5GHz for traffic offloading
+6. to satisfy efficiency, scalability, and capacity requirements, need to provide more capacity while not increasing the operational
+and capital expenditures
+7. so spectrum sharing and oprating in unlicensed bands are essential to 5G objectives.
+
+Problem of heterogeneous app on unlicensed bands
+1. need sparse capacity since have sudden increase while; but not as more as possible -> a waste -> need a dynamic mechanism to adapt this
+2. micro over-provisioned; small-cell even further (too many heterogeneous) -> so traffic variation
+3. unlicensed bands also for massive IoT devices, so high heterogeneous, variable load requirement; massive connectivity (allow for access to
+spectrum for innovation)
+4. heterogeneous devices have diff protocols/priority setting -> no cooperation -> no fair coexistence
+
+Need coexistence mechanism to cooperate this app
+1. cognitive radio/dynamic spectrum access need to provide reliable coex mechanism not to hazard other app in light-licensed/unlicensed Spectrum
+2. so why coexistence matters in 5G? -> high heterogeneity, diff app require diff performance measurement (transmission power)
+3. the importance of unlicensed bands are getting more and more significant
+
+Challenge: heterogeneous app have diff QoS measurements/priorities
+1. challenges in coexistence problem? -> heterogeneous devices use diff protocols -> no coordinate with each other (LTE-U no listen-before-talk, but
+Wifi has; LTE-U adapts its offline period when Wifi online)
+2. protocols across networks operating in unlicensed bands differ, which may cause unfair sharing schemes or the resources
+3. networks should possess adaptability in one of the possible domains: time/freq/code
+4. a desirable property for a coexistence scheme should not require substantial modifications to the existing protocols and especially in the terminal hardware.
+(should allow update over the air)
+
+Existing solution: Q-learning with constant reward/fixed algo for fixed scenario
+1. coex can be done in time/freq/space/code dimensions -> to implement, need flexibility in at least one domains
+2. LTE-U has freq domain gap and time domain gap (duty cycle)
+Wi-Fi Coexistence with Duty Cycled LTE-U:
+1. WiFi has random backoff and listen-before-talk
+On The Use of Markov Decision Processes in Cognitive Radar: An Application to Target Tracking:
+1. modeling the radar operating environment as a MDP and use RL
+2. proposed radar tracking problem based on the perception-action cycle
+3. The goal of this application is to enable the radar to learn from offline training data instead of having to perform online optimization during each radar cycle
+Multi-agent Reinforcement Learning Based Cognitive Anti-jamming:
+1. each WACR needs to avoid the jammer as well as transmissions of other WACRs.
+2. addresses such an anti-jamming problem in a multi-agent environment with the goal of finding optimal anti-jamming and interference avoidance policies for the WACRs
+3. adopt MARL and Q learning
+4. Formalize the underlying POMDP framework assumed in [12] and extend the RL based subband selection policy for anti-jamming to the scenarios inwhich there are multiple
+policy-learning WACRs operating in the same spectrum range challenged by a sweeping jammer
+
+Q-Learning Based Fair and Ecient Coexistence of LTE in Unlicensed Band:
+1. Q-learning used for an ideal and autonomous selection of an LTE-U operational channel muting duration toward fair and ecient spectrum sharing under a dynamic environment
+
+Schemes: centralized vs decentralized
+1. schemes: centralized coordinator -> distribute resources for all devices; decentralized coord -> each operator does its own optimization indep,
+share spectrum through observations & own performance
+
+Literature Review
+A Context-aware and Intelligent Dynamic Channel Selection Scheme for Cognitive Radio Networks
+1. In this paper, a model based on RL is adopted to mimic the cognition cycle to provide context awareness and intelligence among nodes.
+2. use Q learning to determine the next channel to switch to in cognitive radio (DSA, second user senses primar user)
