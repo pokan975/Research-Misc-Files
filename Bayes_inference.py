@@ -7,7 +7,6 @@ Created on Thu Jan 23 22:37:30 2020
 import numpy as np
 import scipy.stats as st
 import matplotlib.pyplot as plt
-import itertools
 
 
 class NormalInvWishart(object):
@@ -47,14 +46,21 @@ mu = 0
 sigma = np.var(sample)
 
 # hyperparameter of prior inverse gamma
-alpha = 1
+alpha = 0.1
 
 m = np.linspace(-5, 5, 100)
 t = np.linspace(0, 10, 100)
 
+x, y = np.meshgrid(m, t)
+
 prior_m = st.norm(mu, np.sqrt(sigma)).pdf(m)
 prior_t = st.invgamma(alpha).pdf(t)
-prior = [(x, y) for x in prior_m for y in prior_t]
+prior = np.zeros((len(t), len(m)))
 
-plt.hist2d(m, t, normed = False, cmap = 'plasma')
+for i in range(t.shape[0]):
+    prior[i, :] = prior_t[i] * prior_m[:]
+
+prior = np.flipud(prior)
+# imshow: extent = [x_min , x_max, y_min , y_max] sets x, y axis values
+plt.imshow(prior, cmap = "plasma", extent=[-5, 5, 0, 10])
 plt.show()
