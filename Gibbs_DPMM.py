@@ -249,6 +249,7 @@ plt.show()
 # plot num of clusters vs. iterations
 ii = np.arange(0, iterations + 1)
 plt.plot(ii, G.cluster_num, "-o")
+# plt.rcParams['figure.figsize'] = 20, 5
 plt.xlabel("iteration")
 plt.ylabel("cluster number")
 plt.title("mean cluster number:{:.2f}".format(np.mean(G.cluster_num)))
@@ -257,25 +258,23 @@ plt.show()
 
 
 
-# =============================================================================
-# # test different sample sizes
-# sample_size = np.arange(100, 200 + 10, 10)
-# # expected number of clusters of Gibbs sampling result for each sample size
-# avg_cluster = []
-# 
-# for nn in sample_size:
-#     print("size: ", nn)
-#     samples = sampleMM(N, multi_prob, comp_mean)
-#     G = Gibbs_sampler(nn, iterations, samples)
-#     G.Gibbs_iteration()
-#     # compute expected number of clusters for each sampling result
-#     avg_cluster.append(np.mean(G.cluster_num))
-#     
-# # plot number of clusters vs. number of samples
-# plt.plot(sample_size, avg_cluster)
-# plt.xlabel("data points")
-# plt.ylabel("avg. cluster number")
-# plt.yscale("log")
-# plt.grid()
-# plt.show()
-# =============================================================================
+# test different sample sizes
+sample_size = np.arange(100, 200 + 10, 10)
+# expected number of clusters of Gibbs sampling result for each sample size
+avg_cluster = []
+
+for nn in sample_size:
+    print("sample size:", nn)
+    samples = sampleMM(nn, multi_prob, comp_mean)
+    G = Gibbs_sampler(nn, iterations, samples)
+    G.Gibbs_iteration()
+    # compute expected number of clusters for each sampling result
+    avg_cluster.append(np.mean(G.cluster_num))
+    
+# plot number of clusters vs. number of samples
+plt.plot(sample_size, avg_cluster)
+plt.xlabel("sample size")
+plt.ylabel("mean cluster number")
+plt.xscale("log")
+plt.grid()
+plt.show()
