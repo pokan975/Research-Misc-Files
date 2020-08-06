@@ -36,14 +36,9 @@ for i in range(N):
 
 # plot the PDF of the GMM
 x = np.linspace(-3, 9, N)
-xpdf = np.zeros((N,1))
-ypdf = np.zeros((N,1))
-zpdf = np.zeros((N,1))
-
-for i in range(N):
-    xpdf[i] = comp_prob[0] * st.norm(mean[0], np.sqrt(var[0])).pdf(x[i])
-    ypdf[i] = comp_prob[1] * st.norm(mean[1], np.sqrt(var[1])).pdf(x[i])
-    zpdf[i] = comp_prob[2] * st.norm(mean[2], np.sqrt(var[2])).pdf(x[i])
+xpdf = comp_prob[0] * st.norm(mean[0], np.sqrt(var[0])).pdf(x)
+ypdf = comp_prob[1] * st.norm(mean[1], np.sqrt(var[1])).pdf(x)
+zpdf = comp_prob[2] * st.norm(mean[2], np.sqrt(var[2])).pdf(x)
     
 sup = xpdf + ypdf + zpdf
 plt.plot(x, xpdf, 'b', label = '$\mu$ = 0, $\sigma^2$ = 1.5, $\pi$ = 0.3')
