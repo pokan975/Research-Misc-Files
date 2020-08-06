@@ -174,3 +174,20 @@ plt.xlabel("iteration")
 plt.ylabel("ELBO value")
 plt.grid()
 plt.show()
+
+plt.rcParams['figure.dpi'] = 150
+# plt.rcParams['axes.facecolor'] = '#dedede'
+q1 = mix_prop[0] * st.norm(ugmm.m[0], np.sqrt(ugmm.s2[0])).pdf(x)
+q2 = mix_prop[1] * st.norm(ugmm.m[1], np.sqrt(ugmm.s2[1])).pdf(x)
+qq = q1 + q2
+plt.plot(x, c1, 'm', label = 'true component 1')
+plt.plot(x, c2, 'r', label = 'true component 2')
+plt.plot(x, sup, 'k',label = "true GMM", linestyle = "--")
+plt.plot(x, q1, 'g', label = 'approx q($\mu_1$)')
+plt.plot(x, q2, 'c', label = 'approx q($\mu_2$)')
+plt.plot(x, qq, 'k',label = "q mixture", linestyle = ":")
+plt.xlabel("support")
+plt.ylabel("PDF")
+plt.title("true GMM vs. converged q")
+plt.legend()
+plt.show()
