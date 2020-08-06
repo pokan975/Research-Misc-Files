@@ -25,22 +25,22 @@ class GMM(object):
         self.data = data
         self.K = K           # number of components
         self.N = len(data)   # number of observations
-        # Draw 1st K-dimensional Dirichlet samples as parameters of the cluster
-        # assignment prob. (Categorical) for each observations
+        # generate initial parameter sets for all q(c_i) from Dirichlet distribution
         self.phi = np.random.dirichlet([1.]*self.K, self.N)
         # generate initial means for all q(mu_k)
         self.m = np.random.randint(low=np.min(self.data), high=np.max(self.data), size=self.K).astype(float)
-        # add some biases to avoid getting the true means at init
+        # add some biases to avoid guessing the true means before CAVI
         self.m += np.random.random(self.K)
         # initial variances of q(mu_k) are 1 for all k = 1, ..., K
         self.s2 = np.array([1.] * self.K)
 
         
     def fit(self, max_iter = 100, tol = 1e-10):
+        # print initial q(mu) before iterations
         for i in range(self.K):
             print("Initial q(\u03BC_%d) = N(%.4f, %.2f)" %(i+1, self.m[i], self.s2[i]))
         
-        # calc 1st ELBO(q)
+        # calc initial ELBO(q)
         self.elbo_values = [self.calc_ELBO()]
         # initialize m_k & s_k^2 evolution histories
         self.m_history = [self.m]
@@ -49,8 +49,8 @@ class GMM(object):
         # CAVI iteration
         for it in range(1, max_iter + 1):
             # CAVI update
-            self._update_phi()
-            self._update_mu()
+            self._update_phi()  # update parameter set for each q(c_i)
+            self._update_mu()   # update parameter set for each q(mu_k)
             self.m_history.append(self.m)
             self.s2_history.append(self.s2)
             # compute ELBO(q) at the end of each update
@@ -67,6 +67,7 @@ class GMM(object):
 
 
     def calc_ELBO(self):
+        # calc ELBO(q) given current q(mu_k)'s and q(c_i)'s
         t1 = -(self.m**2 + self.s2) / (2 * prior_var) + 0.5
         t11 = (prior_mean / prior_var) * self.m
         t12 = 0.5 * np.log(2 * pi * self.s2)
@@ -82,6 +83,7 @@ class GMM(object):
 
 
     def _update_phi(self):
+        # update the probability set for each q(c_i)
         t1 = np.outer(self.data, self.m)
         t2 = -0.5 * (self.m**2 + self.s2 + np.log(2 * pi))
         exponent = t1 + t2[np.newaxis, :]
@@ -91,9 +93,10 @@ class GMM(object):
         self.phi = self.phi / self.phi.sum(1)[:, np.newaxis]
 
     def _update_mu(self):
+        # update variance of each q(mu_k)
         self.s2 = (1 / prior_var + self.phi.sum(0))**(-1)
         assert self.s2.size == self.K
-        
+        # update mean of each q(mu_k)
         self.m = (self.phi * self.data[:, np.newaxis]).sum(0)
         self.m += (prior_mean / prior_var)
         self.m *= self.s2
@@ -109,10 +112,10 @@ components = 2
 # hyper-parameters of prior for mu 
 prior_mean = 5
 prior_var = 2
-# hyper-parameters for prior for c_i 
+# prior for c_i 
 prior_pi = [1/components] * components
 
-# trur means & variances for mixing Gaussians
+# true means & variances for mixing Gaussians
 comp_mean = [3, 6]
 comp_var = 1
 # mixing proportion
@@ -132,7 +135,7 @@ for i, m in enumerate(P):
     samples[i] = np.random.normal(comp_mean[m], std, 1)
 
 
-# plot histogram of data
+# plot histogram of data & PDF of true GMM
 x = np.linspace(0, 10, 500)
 c1 = mix_prop[0] * st.norm(comp_mean[0], 1).pdf(x)
 c2 = mix_prop[1] * st.norm(comp_mean[1], 1).pdf(x)
@@ -150,9 +153,9 @@ plt.show()
 # print prior distribution info
 print("prior p(\u03BC) = N(%.f, %.f)"%(prior_mean, prior_var))
 
-# create VI object, input observations & number of components
+# create VI object
 ugmm = GMM(samples, components)
-# do VI optimization, set max iterations
+# run CAVI optimization
 ugmm.fit(max_iter = 150)
 
 
@@ -168,13 +171,14 @@ for i in range(components):
 # sns.distplot(np.random.normal(ugmm.m[2], 1, N), color='k', hist=False, kde=True)
 # plt.show()
 
-# plot ELBO convergence history
+# plot ELBO value history
 plt.plot(ugmm.elbo_values)
 plt.xlabel("iteration")
 plt.ylabel("ELBO value")
 plt.grid()
 plt.show()
 
+# plot the comparison between true GMM & mixture of approximate dist. q(mu)'s
 plt.rcParams['figure.dpi'] = 150
 # plt.rcParams['axes.facecolor'] = '#dedede'
 q1 = mix_prop[0] * st.norm(ugmm.m[0], np.sqrt(ugmm.s2[0])).pdf(x)
@@ -185,9 +189,9 @@ plt.plot(x, c2, 'r', label = 'true component 2')
 plt.plot(x, sup, 'k',label = "true GMM", linestyle = "--")
 plt.plot(x, q1, 'g', label = 'approx q($\mu_1$)')
 plt.plot(x, q2, 'c', label = 'approx q($\mu_2$)')
-plt.plot(x, qq, 'k',label = "q mixture", linestyle = ":")
+plt.plot(x, qq, 'k',label = "mixture of q($\mu$)", linestyle = ":")
 plt.xlabel("support")
 plt.ylabel("PDF")
-plt.title("true GMM vs. converged q")
+plt.title("true GMM vs. mixture of converged q($\mu_k$)'s")
 plt.legend()
 plt.show()
