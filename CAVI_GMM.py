@@ -63,7 +63,7 @@ class GMM(object):
         
         # iteration terminates but still cannot converge
         if it == max_iter:
-            print('CAVI ended with ELBO(q) {.f}'.format(self.elbo_values[-1]))
+            print('CAVI ended with ELBO(q) %.f'%(self.elbo_values[-1]))
 
 
     def calc_ELBO(self):
