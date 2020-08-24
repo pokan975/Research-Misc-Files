@@ -16,6 +16,9 @@ q(alpha) ~ Gamma(omega_1, omega_2)
 q(v_t) ~ Beta(v_t| gamma_1, gamma_2)
 q(mu_t) ~ N(mu_t| m_t, s2_t)
 q(c_i) ~ Multi(c_i| phi_i), phi_i = (phi_i1, ..., phi_iT)
+
+All numbered ELBO terms & parameter update functions of q refer to respective 
+equations in my note "VI for DPMM"
 """
 
 import numpy as np
@@ -38,7 +41,7 @@ class DPMM(object):
             sample points
         T : int
             truncation level for approximate dist q
-        s : array
+        s : list
             hyper-parameters for dist over alpha
         -------
         None.
@@ -90,10 +93,10 @@ class DPMM(object):
         # CAVI iteration
         for it in range(1, max_iter + 1):
             # CAVI update
-            self.update_c()     # update parameter set for each q(c_i)
-            self.update_v()     # update parameter set for each q(v_t)
-            self.update_mu()    # update parameter set for each q(mu_t)
-            self.update_alpha() # update parameter set for q(alpha)
+            self.update_c()     # update parameters for each q(c_i)
+            self.update_v()     # update parameters for each q(v_t)
+            self.update_mu()    # update parameters for each q(mu_t)
+            self.update_alpha() # update parameters for q(alpha)
             # calc ELBO(q) at the end of all updates
             self.elbo_values.append(self.calc_ELBO())
             
@@ -118,7 +121,6 @@ class DPMM(object):
         d1d12 = digamma(self.gamma[:, 0]) - d12
         d2d12 = digamma(self.gamma[:, 1]) - d12
         
-        # following numbered lowerbound terms refer to my note "VI for DPMM"
         # (1) E[lnP(v_t| alpha)]
         lb_pv1 = (self.omega[0] / self.omega[1] - 1) * d2d12
         lb_pv1 += digamma(self.omega[0])
