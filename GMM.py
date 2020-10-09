@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+@author: Po-Kan (William) Shih
+@advisor: Dr.Bahman Moraffah
+Visualize 1-D Gaussian mixture model
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as st
