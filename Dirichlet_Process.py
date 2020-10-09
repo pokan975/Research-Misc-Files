@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Oct 21 15:26:49 2019
-@author: WilliamShih
+@author: Po-Kan (William) Shih
+@advisor: Dr.Bahman Moraffah
 """
 
 import numpy as np
@@ -14,7 +14,7 @@ np.random.seed(0)
 alpha = 2
 # =============================================================================
 # This part of code simulates the realization of Dirichlet process using
-# stick-breaking approach, taking stanard Gaussian as base distribution
+# stick-breaking approach, taking standard Gaussian as base distribution
 # =============================================================================
 def Stick_Breaking(num_weights, alpha):
     betas = np.random.beta(1, alpha, size = num_weights) 
