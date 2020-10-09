@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jan 23 22:37:30 2020
-@author: William
+@author: Po-Kan (William) Shih
+@advisor: Dr.Bahman Moraffah
 """
 
 import numpy as np
