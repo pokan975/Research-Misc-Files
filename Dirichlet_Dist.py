@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+@author: Po-Kan (William) Shih
+@advisor: Dr.Bahman Moraffah
+"""
+
 import numpy as np
 import scipy.stats as st
 import matplotlib.pyplot as plt
